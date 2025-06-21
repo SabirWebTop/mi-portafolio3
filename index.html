@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Responsive Portfolio</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background-color: #1f2a40;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ÍCONOS Y TOGGLERS */
+
+    .corner-icon-mobile {
+      display: none;
+      position: absolute;
+      top: 15px;
+      right: 60px;
+      font-size: 22px;
+      color: #4CAF50;
+      transition: transform 0.3s, color 0.3s;
+      z-index: 1100;
+    }
+
+    .corner-icon-mobile:hover {
+      color: white;
+      transform: scale(1.2);
+    }
+
+    .menu-toggle-mobile {
+      display: none;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      z-index: 1100;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .menu-toggle-mobile:hover {
+      color: #4CAF50;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
+      .corner-icon-mobile {
+        display: inline-block;
+      }
+
+      .menu-toggle-mobile {
+        display: inline-block;
+      }
+    }
+
+    /* NAVBAR */
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Responsive nav */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #1f2a40;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        width: 200px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px;
+        text-align: left;
+      }
+    }
+
+    /* HERO */
+
+    .hero {
+      background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)),
+        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+    }
+
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background 0.3s;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    /* FEATURES */
+
+    .features {
+      padding: 60px 20px;
+      text-align: center;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .features-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .feature-item {
+      max-width: 300px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+    }
+
+    .feature-item i {
+      background-color: #e8f5e9;
+      color: #4CAF50;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin: 0 auto 15px;
+      transition: transform 0.3s;
+    }
+
+    .feature-item:hover i {
+      transform: scale(1.2);
+    }
+
+    /* SECTION TITLE */
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      color: #222;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: #4CAF50;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* WORK CARDS */
+
+    .work-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .card {
+      position: relative;
+      background-color: white;
+      border-radius: 15px;
+      padding: 25px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 0.95em;
+      margin-bottom: 15px;
+    }
+
+    .btn-demo {
+      display: inline-block;
+      padding: 10px 25px;
+      background-color: #222;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    .btn-demo:hover {
+      background-color: #4CAF50;
+      box-shadow: 0 0 12px rgba(76, 175, 80, 0.5);
+      color: white;
+    }
+
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.75em;
+      font-weight: 600;
+      border-radius: 5px;
+    }
+
+    /* CONTACTO */
+
+    .contact {
+      background-color: #1f2a40;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact input,
+    .contact textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .contact button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .contact button:hover {
+      background-color: #45a049;
+    }
+
+    .contact .section-title {
+      color: #fff !important;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      background-color: #0d1b2a;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #4CAF50;
+    }
+
+    /* FINAL responsive extra */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #1f2a40;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: block;
+        color: white;
+      }
+
+      .card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">WebMaster</div>
+    <a href="javascript:void(0)" class="menu-toggle-mobile" onclick="toggleMenu()" title="Menu">
+      <i id="menuIcon" class="fas fa-bars"></i>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <h1>Modern & Responsive Website</h1>
+      <p>I build websites with HTML, CSS and JavaScript</p>
+      <a href="#contact" class="btn">Contact Me</a>
+    </section>
+
+    <section class="features" id="services">
+      <h2 class="section-title">What I Offer</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <i class="fas fa-mobile-alt fa-2x"></i>
+          <h3>Fully Responsive Design</h3>
+          <p>Seamless experience across all devices — mobile, tablet, and desktop.</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-code fa-2x"></i>
+          <h3>Clean & Optimized Code</h3>
+          <p>Crafted with semantic HTML5, modern CSS3, and vanilla JavaScript.</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-palette fa-2x"></i>
+          <h3>Modern & Custom UI</h3>
+          <p>Attractive, intuitive, and tailored user interfaces for your brand.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 50px 0; background-color: #f7f7f7;" id="portfolio">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="work-container">
+        <div class="card">
+          <span class="badge">HTML</span>
+          <img src="img/177C2FC5-AA2F-4CFD-8923-8E229D5B1497.png" alt="Landing Page">
+          <h3>Landing Page</h3>
+          <p>Clean and responsive landing page built with HTML and CSS.</p>
+          <p style="color: #888; font-weight: bold;">Demo coming soon...</p>
+        </div>
+        <div class="card">
+          <span class="badge">Portfolio</span>
+          <img src="img/76DEC88B-C10A-4FBA-A58B-78C452DD55C3.png" alt="Portfolio Website">
+          <h3>Portfolio Website</h3>
+          <p>Personal website with interactive layout and custom UI.</p>
+          <p style="color: #888; font-weight: bold;">Demo coming soon...</p>
+        </div>
+        <div class="card">
+          <span class="badge">JavaScript</span>
+          <img src="img/68CC02A0-1E81-4D74-9F8E-F49EF87C04F0.png" alt="Business Site">
+          <h3>Business Site</h3>
+          <p>Multi-section site for small businesses using JavaScript.</p>
+          <p style="color: #888; font-weight: bold;">Demo coming soon...</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2 class="section-title">Contact Me</h2>
+      <form id="contactForm" action="#" method="POST">
+        <input type="text" placeholder="Your Full Name" required>
+        <input type="email" placeholder="example@email.com" required>
+        <textarea placeholder="Write your message (at least 10 characters)" required></textarea>
+        <button type="submit">Send Message</button>
+        <p id="formMessage" style="margin-top: 10px; color: #4CAF50; font-weight: bold; display: none;">
+          ✅ Thank you! Your message has been sent.
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 WebMaster. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // =====================
+    // MENÚ MÓVIL + CAMBIO DE ICONO
+    // =====================
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      const menuIcon = document.getElementById('menuIcon');
+
+      navLinks.classList.toggle('open');
+
+      // Cambiar icono ☰ ↔ ✖
+      if (navLinks.classList.contains('open')) {
+        menuIcon.classList.remove('fa-bars');
+        menuIcon.classList.add('fa-times');
+      } else {
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+      }
+    }
+
+    // =====================
+    // ANIMACIÓN DE CARDS AL HACER SCROLL
+    // =====================
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // =====================
+    // NAVEGACIÓN ACTIVA AL HACER SCROLL
+    // =====================
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('main section');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      sections.forEach(sec => {
+        const top = window.scrollY;
+        const offset = sec.offsetTop - 150;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+
+        if (top >= offset && top < offset + height) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+
+    // =====================
+    // VALIDACIÓN DEL FORMULARIO + MENSAJE DE ÉXITO
+    // =====================
+    document.querySelector('#contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = this.querySelector('input[type="text"]');
+      const email = this.querySelector('input[type="email"]');
+      const message = this.querySelector('textarea');
+      const feedback = this.querySelector('#formMessage');
+
+      if (name.value.trim().length < 3) {
+        alert("Please enter your name (at least 3 characters).");
+        name.focus();
+        return;
+      }
+
+      const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      if (!emailRegex.test(email.value.trim())) {
+        alert("Please enter a valid email address.");
+        email.focus();
+        return;
+      }
+
+      if (message.value.trim().length < 10) {
+        alert("Please enter a message with at least 10 characters.");
+        message.focus();
+        return;
+      }
+
+      // Mostrar mensaje de éxito
+      feedback.style.display = 'block';
+      this.reset();
+
+      // Ocultar mensaje después de 4 segundos
+      setTimeout(() => {
+        feedback.style.display = 'none';
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
